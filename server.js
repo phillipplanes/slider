@@ -559,8 +559,14 @@ const VIEWER_HTML = `<!doctype html>
 <style>
   html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:system-ui,sans-serif}
   #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-  #stage img,#stage iframe{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+  #stage img{width:100%;height:100%;object-fit:contain}
   #stage iframe{width:100%;height:100%;border:0}
+  #gate{position:fixed;inset:0;background:#111;display:none;align-items:center;justify-content:center;z-index:10}
+  #gate .card{background:#1c1c1e;padding:32px 40px;border-radius:16px;display:flex;flex-direction:column;
+    gap:12px;align-items:center;color:#eee;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+  #gate input{padding:10px 12px;border-radius:8px;border:1px solid #444;background:#2a2a2c;color:#eee;font-size:14px;width:100%}
+  #gate button{background:#0a84ff;color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:14px;width:100%}
+  #gate .msbtn{background:#2f2f2f}
   #setname{position:fixed;top:10px;left:10px;color:#888;font-size:14px;opacity:.7}
   #hint{position:fixed;bottom:10px;left:10px;color:#888;font-size:12px;opacity:.7}
   #controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:12px;
@@ -582,6 +588,13 @@ const VIEWER_HTML = `<!doctype html>
   #speedwrap label{min-width:86px;text-align:center}
 </style></head><body>
 <div id="stage"></div>
+<div id="gate">
+  <div class="card">
+    <div style="font-size:20px;font-weight:600">Slides</div>
+    <div style="font-size:13px;color:#999">Please sign in to watch</div>
+    <div id="gateAuth" style="display:flex;flex-direction:column;gap:10px;width:250px"></div>
+  </div>
+</div>
 <div id="bar"></div>
 <div id="setname"></div>
 <div id="who"></div>
@@ -643,10 +656,16 @@ const VIEWER_HTML = `<!doctype html>
   document.addEventListener("visibilitychange", () => { accrue(); if (document.hidden) flush(true); });
   window.addEventListener("pagehide", () => flush(true));
 
-  /* ---- viewer sign-in (Microsoft SSO, or temp name+key) ---- */
+  /* ---- viewer sign-in (required before slides are shown) ---- */
+  const gate = document.getElementById("gate");
+  const gateAuth = document.getElementById("gateAuth");
+  let signedIn = false;
+
   function renderAuth(d) {
     who.innerHTML = "";
     if (d.user) {
+      signedIn = true;
+      gate.style.display = "none";
       const label = document.createElement("span");
       label.textContent = "Signed in: " + d.user;
       const out = document.createElement("button");
@@ -661,14 +680,21 @@ const VIEWER_HTML = `<!doctype html>
       who.appendChild(row);
       return;
     }
+    signedIn = false;
+    gate.style.display = "flex";
+    gateAuth.innerHTML = "";
     if (d.msSso) {
       const b = document.createElement("button");
+      b.className = "msbtn";
       b.textContent = "Sign in with Microsoft";
       b.onclick = () => location.href = "/api/ms/login";
-      who.appendChild(b);
+      gateAuth.appendChild(b);
     }
     if (d.userKey) {
       const form = document.createElement("form");
+      form.style.display = "flex";
+      form.style.flexDirection = "column";
+      form.style.gap = "10px";
       form.innerHTML =
         "<input placeholder='Your name' required>" +
         "<input placeholder='Key' type='password' required>" +
@@ -682,7 +708,7 @@ const VIEWER_HTML = `<!doctype html>
         if (r.ok) location.reload();
         else { key.value = ""; key.placeholder = "Wrong key"; }
       };
-      who.appendChild(form);
+      gateAuth.appendChild(form);
     }
   }
 
@@ -693,9 +719,10 @@ const VIEWER_HTML = `<!doctype html>
       const d = await r.json();
       seconds = d.defaultSeconds || 20;
       const oldLen = slides.length;
+      renderAuth(d);
+      if (!signedIn) return; // login required before any slides are shown
       slides = d.set ? d.set.slides : [];
       document.getElementById("setname").textContent = d.set ? d.set.name : "";
-      renderAuth(d);
       updateSpeedLabel();
       if (oldLen === 0 && slides.length) render();
       count.textContent = slides.length ? (idx + 1) + " / " + slides.length : "";
@@ -757,6 +784,7 @@ const VIEWER_HTML = `<!doctype html>
   es.onmessage = (ev) => {
     const d = JSON.parse(ev.data);
     if (d.type === "update" && d.set) {
+      if (!signedIn) return;
       const currentId = slides[idx] && slides[idx].id;
       slides = d.set.slides;
       document.getElementById("setname").textContent = d.set.name;
@@ -767,10 +795,11 @@ const VIEWER_HTML = `<!doctype html>
   };
 
   await load();
-  render();
+  if (signedIn) render();
 
   // Periodic re-check fallback (long-open displays, dropped SSE, etc.)
   setInterval(async () => {
+    if (!signedIn) return;
     const before = JSON.stringify(slides);
     await load();
     if (JSON.stringify(slides) !== before) render();
