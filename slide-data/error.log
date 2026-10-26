@@ -1,0 +1,55 @@
+2026-10-26T15:46:59.463Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:48:27.469Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:49:27.473Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:50:27.470Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:51:27.460Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:53:18.824Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:53:48.825Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:53:48.827Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T15:59:42.784Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T16:00:01.452Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-26T16:00:15.491Z [uncaughtException] ReferenceError: p is not defined
+    at IncomingMessage.<anonymous> (/Users/phillip/Downloads/psb_slides/server.js:1104:31)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)

@@ -1,0 +1,179 @@
+{
+  "sets": [
+    {
+      "id": "a2b5bbb2d0e175bf",
+      "name": "Default Set",
+      "slides": [
+        {
+          "id": "e048ed13c2d63376",
+          "name": "Gemini_Generated_Image_5oanfy5oanfy5oan.jpeg",
+          "file": "e048ed13c2d63376-Gemini_Generated_Image_5oanfy5oanfy5oan.jpeg",
+          "kind": "image"
+        },
+        {
+          "id": "0c0acfaef186c411",
+          "name": "Vintage Ron Roberson Mayor Fundraiser Badge.png",
+          "file": "0c0acfaef186c411-Vintage_Ron_Roberson_Mayor_Fundraiser_Badge.png",
+          "kind": "image"
+        },
+        {
+          "id": "70d19a624babf26f",
+          "name": "Trophy_transport_half_page_focus_ad.pdf",
+          "file": "70d19a624babf26f-Trophy_transport_half_page_focus_ad.pdf",
+          "kind": "pdf"
+        },
+        {
+          "id": "f24677e29f1bd604",
+          "name": "Premium Safari Trophy Transport Ad.png",
+          "file": "f24677e29f1bd604-Premium_Safari_Trophy_Transport_Ad.png",
+          "kind": "image"
+        }
+      ]
+    },
+    {
+      "id": "d3a81869f0b85e74",
+      "name": "test set",
+      "slides": [
+        {
+          "id": "b2f5f5f38fec11db",
+          "name": "Slide4.jpg",
+          "file": "b2f5f5f38fec11db-Slide4.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "98e8ec27fb98b94c",
+          "name": "Slide2.jpg",
+          "file": "98e8ec27fb98b94c-Slide2.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "0fcbd4a2e9f2e663",
+          "name": "Slide1.jpg",
+          "file": "0fcbd4a2e9f2e663-Slide1.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "d26606daa02c6a98",
+          "name": "Slide3.jpg",
+          "file": "d26606daa02c6a98-Slide3.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "537bdd1e56812a18",
+          "name": "Slide5.jpg",
+          "file": "537bdd1e56812a18-Slide5.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "852746b45180d466",
+          "name": "Slide6.jpg",
+          "file": "852746b45180d466-Slide6.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "c8d55302bf0baf69",
+          "name": "Slide7.jpg",
+          "file": "c8d55302bf0baf69-Slide7.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "dbcaa5c494217ec1",
+          "name": "Slide8.jpg",
+          "file": "dbcaa5c494217ec1-Slide8.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "0948410d5c1abd5d",
+          "name": "Slide9.jpg",
+          "file": "0948410d5c1abd5d-Slide9.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "2520dad42108c68f",
+          "name": "Slide10.jpg",
+          "file": "2520dad42108c68f-Slide10.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "45952344264923cf",
+          "name": "Slide11.jpg",
+          "file": "45952344264923cf-Slide11.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "8801a324de536367",
+          "name": "Slide12.jpg",
+          "file": "8801a324de536367-Slide12.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "d33f8ab4f04ae772",
+          "name": "Slide13.jpg",
+          "file": "d33f8ab4f04ae772-Slide13.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "b44bd2577429558e",
+          "name": "Slide14.jpg",
+          "file": "b44bd2577429558e-Slide14.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "e683569bed1102ec",
+          "name": "Slide15.jpg",
+          "file": "e683569bed1102ec-Slide15.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "4f0ad654a11490e1",
+          "name": "Slide16.jpg",
+          "file": "4f0ad654a11490e1-Slide16.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "7158361234d9cb2d",
+          "name": "Slide17.jpg",
+          "file": "7158361234d9cb2d-Slide17.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "c19a7bc014b97bc3",
+          "name": "Slide18.jpg",
+          "file": "c19a7bc014b97bc3-Slide18.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "9073659736827c32",
+          "name": "Slide19.jpg",
+          "file": "9073659736827c32-Slide19.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "81a8487aec822984",
+          "name": "Slide20.jpg",
+          "file": "81a8487aec822984-Slide20.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "de3702d632ec8bd4",
+          "name": "Slide21.jpg",
+          "file": "de3702d632ec8bd4-Slide21.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "695ec4c505c1bbad",
+          "name": "Slide22.jpg",
+          "file": "695ec4c505c1bbad-Slide22.jpg",
+          "kind": "image"
+        },
+        {
+          "id": "f0a20760c9062a4c",
+          "name": "Slide23.jpg",
+          "file": "f0a20760c9062a4c-Slide23.jpg",
+          "kind": "image"
+        }
+      ]
+    }
+  ],
+  "activeSetId": "d3a81869f0b85e74"
+}
