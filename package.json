@@ -1,0 +1,13 @@
+{
+  "name": "slider",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Slide manager and viewer for class announcements",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
