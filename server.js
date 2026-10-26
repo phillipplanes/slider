@@ -400,8 +400,9 @@ function handleApi(req, res, rawBody) {
 
     const slides = set.slides.map((s) => {
       const st = stats.perSlide[s.id] || { ms: 0, views: 0 };
-      return { id: s.id, name: s.name, views: st.views, watchMs: st.ms,
-        avgMs: st.views ? st.ms / st.views : 0 };
+      const users = Object.values(stats.perUser)
+        .filter((u) => u.slides && u.slides[s.id] > 0).length;
+      return { id: s.id, name: s.name, views: st.views, watchMs: st.ms, users };
     });
     const setTotal = slides.reduce((a, s) => a + s.watchMs, 0);
 
@@ -821,6 +822,8 @@ const ADMIN_HTML = `<!doctype html>
   li{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid #eee;border-radius:10px;margin:6px 0;background:#fafafa}
   li img{width:96px;height:60px;object-fit:cover;border-radius:6px;background:#eee}
   li .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+  li .stat{color:#666;font-size:12px;text-align:right;white-space:nowrap;min-width:130px}
+  li .stat b{color:#222;font-weight:600}
   .mv{background:#888}.del{background:#c33}
   #msg{margin:8px 0;color:#080}.err{color:#c33}
   #panel{display:none}
@@ -865,12 +868,6 @@ const ADMIN_HTML = `<!doctype html>
   <h2>Slides <span style="color:#999;font-weight:400">(drag to reorder)</span></h2>
   <ul id="list"></ul>
 
-  <h2>Aggregate stats <span id="setName2" style="color:#999;font-weight:400"></span></h2>
-  <table id="stats"><thead><tr>
-    <th>#</th><th>Slide</th><th class="num">Views</th>
-    <th class="num">Total watch time</th><th class="num">Avg / view</th>
-  </tr></thead><tbody></tbody><tfoot></tfoot></table>
-
   <h2>Viewer stats <span id="setName3" style="color:#999;font-weight:400"></span></h2>
   <table id="users"><thead><tr>
     <th>User</th><th class="num">All-time total</th><th class="num">In this set</th><th>Slides in this set</th>
@@ -879,7 +876,7 @@ const ADMIN_HTML = `<!doctype html>
   <button onclick="logout()" style="background:#666;margin-top:24px">Sign out</button>
 </div>
 <script>
-let sets = [], activeId = null, selId = null, picked = null, dragFrom = null;
+let sets = [], activeId = null, selId = null, picked = null, dragFrom = null, statData = null;
 const msg = document.getElementById("msg");
 const drop = document.getElementById("drop");
 const file = document.getElementById("file");
@@ -978,10 +975,15 @@ function renderSlides() {
   ul.innerHTML = "";
   if (!set) { msg.textContent = "No set selected — create one above."; return; }
   set.slides.forEach((s, i) => {
+    const st = statData && (statData.slides || []).find(x => x.id === s.id);
     const li = document.createElement("li");
     li.draggable = true;
     li.innerHTML = "<span class='ord' style='color:#999;font-size:12px;width:22px;text-align:right'>" + (i + 1) + "</span>" +
-      thumb(s) + "<span class='nm'>" + s.name + "</span>";
+      thumb(s) + "<span class='nm'>" + s.name + "</span>" +
+      "<span class='stat'>" +
+      "<b>" + (st ? fmt(st.watchMs) : "0s") + "</b> shown" +
+      (st && st.users ? " · " + st.users + (st.users === 1 ? " user" : " users") : "") +
+      "</span>";
     const up = document.createElement("button");
     up.className = "mv"; up.textContent = "↑"; up.onclick = () => move(i, -1);
     const dn = document.createElement("button");
@@ -1044,28 +1046,9 @@ async function upload() {
 
 function renderStats(st) {
   const label = st && st.set ? st.set.name : "";
-  document.getElementById("setName2").textContent = label ? "(" + label + ")" : "";
   document.getElementById("setName3").textContent = label ? "(" + label + ")" : "";
-
-  const tb = document.querySelector("#stats tbody");
-  tb.innerHTML = "";
-  if (st && st.set) {
-    (st.slides || []).forEach((r, i) => {
-      tb.insertAdjacentHTML("beforeend",
-        "<tr><td>" + (i + 1) + "</td><td>" + r.name + "</td>" +
-        "<td class='num'>" + r.views + "</td>" +
-        "<td class='num'>" + fmt(r.watchMs) + "</td>" +
-        "<td class='num'>" + fmt(r.avgMs) + "</td></tr>");
-    });
-    if (!(st.slides || []).length) tb.innerHTML = "<tr><td colspan='5'>No slides in this set.</td></tr>";
-    document.querySelector("#stats tfoot").innerHTML =
-      "<tr class='total'><td></td><td>Set total</td><td class='num'></td>" +
-      "<td class='num'>" + fmt(st.set.totalMs) + "</td><td></td></tr>";
-  } else {
-    tb.innerHTML = "<tr><td colspan='5'>No set selected.</td></tr>";
-    document.querySelector("#stats tfoot").innerHTML = "";
-  }
-
+  statData = st;              // used by the inline stats in the slide list
+  renderSlides();             // re-render the list so the stats columns refresh
   const ub = document.querySelector("#users tbody");
   ub.innerHTML = "";
   if (st && (st.users || []).length) {
